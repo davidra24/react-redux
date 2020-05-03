@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.margen {
+  margin: 5%;
+}
+
+.tabla {
+  width: 100%;
+  text-align: left;
+}
+
+.tabla td {
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+#menu {
+  background-color: #253a46;
+  padding: 3%;
+  font-size: 150%;
+}
+
+#menu a {
+  color: white;
+  padding-right: 5%;
+}
+
+body {
+  margin: 0;
+}
