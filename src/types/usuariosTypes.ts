@@ -1,4 +1,4 @@
-export const TRAER_TODOS = 'traer_usuarios';
-export const CARGANDO = 'cargando';
-export const CARGADO = 'cargado';
-export const ERROR = 'error';
+export const TRAER_USUARIOS = 'traer_usuarios';
+export const CARGANDO_USUARIOS = 'cargando_usuarios';
+export const CARGADO_USUARIOS = 'cargado_usuarios';
+export const ERROR_USUARIOS = 'error_usuarios';

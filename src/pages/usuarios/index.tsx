@@ -13,7 +13,7 @@ const API = 'https://jsonplaceholder.typicode.com/users';
 interface AppProps {
   usuarios: Usuario[];
   cargando: boolean;
-  traerTodos: Function;
+  traerUsuarios: Function;
   cargaAction: Function;
   terminarCarga: Function;
   setError: Function;
@@ -26,14 +26,14 @@ class Usuarios extends Component<AppProps, AppState> {
     this.state = {
       usuarios: [],
     };
-    this.props.cargaAction();
   }
 
   traerUsuarios = async () => {
+    this.props.cargaAction();
     await fetch(API)
       .then((response) => response.json())
       .then((usuarios) => {
-        this.props.traerTodos(usuarios);
+        this.props.traerUsuarios(usuarios);
       })
       .catch((error) => {
         this.props.setError(error.message);
