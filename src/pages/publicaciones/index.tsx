@@ -6,7 +6,7 @@ import * as publicacionesActions from '../../actions/publicacionesActions';
 import { Loading } from '../../components/cargando';
 import { Publicacion } from '../../data/publicacion';
 import { Error } from '../../components/error';
-import { Comentarios } from './comentarios';
+import Comentarios from './comentarios';
 
 const API = 'https://jsonplaceholder.typicode.com/users';
 const API_POST = 'http://jsonplaceholder.typicode.com/posts?userId=';
@@ -27,6 +27,7 @@ interface props {
   cargaAction: Function;
   traerUsuarios: Function;
   traerPublicaciones: Function;
+  traerComentarios: Function;
   traerPorUsuario: Function;
   setError: Function;
   terminarCarga: Function;
@@ -86,12 +87,13 @@ class Publicaciones extends Component<props, any> {
   }
 
   mostrarComentarios = (index: number) => {
-    console.log(index);
+    this.props.abrirCerrar(index);
+    if (!this.props.publicacionesReducer.publicaciones[index].comentarios) {
+      this.props.traerComentarios(index);
+    }
   };
 
   render() {
-    console.log(this.props);
-
     if (this.props.usuariosReducer.error) {
       return <Error error={this.props.usuariosReducer.error}></Error>;
     }
@@ -121,7 +123,11 @@ class Publicaciones extends Component<props, any> {
               >
                 <h3 className='center'>{publicacion.title}</h3>
                 <p className='center'>{publicacion.body}</p>
-                {publicacion.abierto ? <Comentarios /> : <div />}
+                {publicacion.abierto ? (
+                  <Comentarios comentarios={publicacion.comentarios} />
+                ) : (
+                  <div />
+                )}
               </div>
             )
           )}

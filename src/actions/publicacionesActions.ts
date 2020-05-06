@@ -4,6 +4,7 @@ import {
   ERROR_PUBLICACIONES,
   CARGADO_PUBLICACIONES,
   TRAER_PUBLICACION,
+  TRAER_COMENTARIOS,
 } from '../types/publicacionesTypes';
 import { Publicacion } from '../data/publicacion';
 import { Dispatch } from 'redux';
@@ -66,5 +67,32 @@ export const setError = () => (dispatch: Dispatch) => {
   dispatch({
     type: ERROR_PUBLICACIONES,
     payload: 'Algo salió mal, intente más tarde',
+  });
+};
+
+export const traerComentarios = (index: number) => async (
+  dispatch: Dispatch,
+  getState: Function
+) => {
+  const { publicaciones } = getState().publicacionesReducer;
+  const seleccionada = publicaciones[index];
+
+  const respuesta = await fetch(
+    `http://jsonplaceholder.typicode.com/comments?postId=${seleccionada.id}`
+  )
+    .then((respuesta) => respuesta.json())
+    .then((data) => data);
+
+  const actualizada = await {
+    ...seleccionada,
+    comentarios: respuesta,
+  };
+
+  const publicaciones_actualizadas = [...publicaciones];
+  publicaciones_actualizadas[index] = await actualizada;
+
+  dispatch({
+    type: TRAER_COMENTARIOS,
+    payload: publicaciones_actualizadas,
   });
 };
